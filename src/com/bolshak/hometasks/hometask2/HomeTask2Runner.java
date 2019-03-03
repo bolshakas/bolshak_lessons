@@ -3,7 +3,7 @@ package com.bolshak.hometasks.hometask2;
 import static java.lang.Integer.parseInt;
 import static java.lang.String.valueOf;
 
-public class HomeTaskRunner2 {
+public class HomeTask2Runner {
     public static void main(String[] args) {
         changeNumbers(12, 22);
         subtractionOfNumbers(543);
