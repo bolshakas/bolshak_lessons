@@ -2,7 +2,7 @@ package com.bolshak.hometasks.hometask4;
 
 import java.util.Scanner;
 
-public class homeTask4Runner {
+public class HomeTask4Runner {
 
     public static void main(String[] args) {
         int number = getIntFromScanner();
