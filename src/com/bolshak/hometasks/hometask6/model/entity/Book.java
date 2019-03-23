@@ -1,4 +1,4 @@
-package com.bolshak.hometasks.hometask6;
+package com.bolshak.hometasks.hometask6.model.entity;
 
 public class Book {
     private int id;
@@ -75,13 +75,9 @@ public class Book {
         this.cost = cost;
     }
 
-    public void view() {
-        System.out.println(toString());
-    }
-
     @Override
     public String toString() {
-        return ("ID: " + id + "; name: " + name +  "; author: " + author + "; publishing house: " + publishingHouse + "; year of publishing: " + yearOfPublishing + "; number of pages: " + numberOfPages + "; cost: " + cost);
+        return ("ID: " + id + "; name: " + name + "; author: " + author + "; publishing house: " + publishingHouse + "; year of publishing: " + yearOfPublishing + "; number of pages: " + numberOfPages + "; cost: " + cost);
 
     }
 }
