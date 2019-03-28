@@ -67,4 +67,5 @@ public class View {
     private static void print(String string) {
         System.out.print(string);
     }
+
 }
