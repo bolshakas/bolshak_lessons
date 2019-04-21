@@ -1,6 +1,8 @@
 package com.bolshak.hometasks.hometask6.model.entity;
 
-public class Book {
+import java.io.Serializable;
+
+public class Book implements Serializable {
     private int id;
     private String name;
     private String author;
@@ -8,6 +10,9 @@ public class Book {
     private int yearOfPublishing;
     private int numberOfPages;
     private double cost;
+
+    public Book() {
+    }
 
     public Book(int id, String name, String author, String publishingHouse, int yearOfPublishing, int numberOfPages, double cost) {
         this.id = id;

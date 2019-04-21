@@ -1,26 +1,28 @@
 package com.bolshak.hometasks.hometask6.controller;
 
+import com.bolshak.hometasks.hometask6.controller.exceptions.AuthorFormatException;
+import com.bolshak.hometasks.hometask6.controller.exceptions.FileNameFormatException;
+import com.bolshak.hometasks.hometask6.controller.exceptions.PercentFormatException;
+import com.bolshak.hometasks.hometask6.controller.exceptions.YearFormatException;
 import com.bolshak.hometasks.hometask6.veiw.View;
 
-import java.util.Date;
-import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class Controller {
 
-    private static final int MIN_INPUT_PERCENT_VALUE = -100;
-    private static final int CURRENT_YEAR = new Date().getYear() + 1900;
 
     private Controller() {
     }
 
-    public static int inputPercent() {
+    public static int inputPercent()  {
         Scanner scanner = new Scanner(System.in);
         View.printInputPercentMessage();
         int percent = scanner.nextInt();
-        if (percent < MIN_INPUT_PERCENT_VALUE) {
-            View.printTryAgainMessage();
-            percent = scanner.nextInt();
+        try {
+            Validator.validatePercent(percent);
+        } catch (PercentFormatException ex) {
+            View.printIncorrectInput();
+            percent = inputPercent();
         }
         return percent;
     }
@@ -28,23 +30,42 @@ public class Controller {
     public static String inputAuthor() {
         Scanner scanner = new Scanner(System.in);
         View.printInputAuthorMessage();
-        return scanner.nextLine();
+        String author = scanner.nextLine();
+        try {
+           Validator.validateAuthor(author);
+        }
+        catch (AuthorFormatException e) {
+            View.printIncorrectInput();
+            author = inputAuthor();
+        }
+        return author;
     }
 
 
     public static int inputYearOfPublishing() {
         Scanner scanner = new Scanner(System.in);
         View.printInputYearMessage();
-        int yearOfPublishing;
+        int yearOfPublishing = scanner.nextInt();
         try {
-            yearOfPublishing = scanner.nextInt();
-            if (yearOfPublishing > CURRENT_YEAR) {
-                throw new InputMismatchException();
-            }
-        } catch (InputMismatchException ex) {
-            View.printWrongYearMessage();
+            Validator.validateYearOfPublishing(yearOfPublishing);
+        } catch (YearFormatException e) {
+            View.printIncorrectInput();
             yearOfPublishing = inputYearOfPublishing();
         }
         return yearOfPublishing;
+    }
+
+    public static String inputNameOfFile (){
+
+        Scanner scanner = new Scanner(System.in);
+        String nameOfFile = scanner.nextLine();
+        try {
+            Validator.validateNameOfFile(nameOfFile);
+        }
+        catch (FileNameFormatException e) {
+            View.printIncorrectInput();
+            nameOfFile = inputNameOfFile();
+        }
+        return nameOfFile;
     }
 }

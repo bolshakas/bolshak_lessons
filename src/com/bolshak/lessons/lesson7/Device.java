@@ -6,6 +6,7 @@ public  class Device {
     private double cost;
     private String id;
     private String producer;
+    private boolean b;
 
     public Device(double cost, String id, String producer) {
         this.cost = cost;
@@ -69,5 +70,10 @@ public  class Device {
 
     }
 
-
+//public int HashCode (){
+//        int result =17;
+//        result*=31+ (int)(Double.doubleToLongBits(cost) ^(Double.doubleToLongBits(cost)>>>32));
+//        result*=31+(b? 1:0);
+//
+//    }
 }

@@ -1,8 +1,12 @@
 package com.bolshak.hometasks.hometask6.model.entity;
 
-public class Books {
+import java.io.Serializable;
+
+public class Books  implements Serializable {
 
     private Book[] bookArr;
+
+    public Books (){}
 
     public Books(int length) {
         bookArr = new Book[length];
@@ -12,5 +16,6 @@ public class Books {
         return bookArr;
     }
 
+    
 }
 

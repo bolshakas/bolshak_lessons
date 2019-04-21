@@ -5,6 +5,9 @@ import com.bolshak.hometasks.hometask6.model.entity.Book;
 import com.bolshak.hometasks.hometask6.model.entity.Books;
 import com.bolshak.hometasks.hometask6.veiw.View;
 
+import java.util.Arrays;
+import java.util.Comparator;
+
 public class BooksService {
 
     private static final String CHESS_FOR_DUMMIES = "Chess for Dummies";
@@ -42,6 +45,7 @@ public class BooksService {
         addBook(book1, books.getBookArr());
         addBook(book2, books.getBookArr());
         addBook(book3, books.getBookArr());
+        View.printInitArray();
         return books;
     }
 
@@ -72,16 +76,17 @@ public class BooksService {
         Book[] bookArr = bookList.getBookArr();
         String author = Controller.inputAuthor();
         int counter = getBooksLengthByAuthor(bookArr, author);
-        Books booksWithDefineAuthor = new Books(counter);
+        Books booksWithDefineAuthor;
 
         if (counter == INIT_NUMBER) {
             View.printNotFoundMessage();
-            searchByAuthor(bookList);
-        }
-
-        for (Book book : bookArr) {
-            if (book.getAuthor().equalsIgnoreCase(author)) {
-                addBook(book, booksWithDefineAuthor.getBookArr());
+            booksWithDefineAuthor = searchByAuthor(bookList);
+        } else {
+            booksWithDefineAuthor = new Books(counter);
+            for (Book book : bookArr) {
+                if (book.getAuthor().equalsIgnoreCase(author)) {
+                    addBook(book, booksWithDefineAuthor.getBookArr());
+                }
             }
         }
         return booksWithDefineAuthor;
@@ -101,16 +106,17 @@ public class BooksService {
         Book[] bookArr = bookList.getBookArr();
         int yearOfPublishing = Controller.inputYearOfPublishing();
         int counter = getCounterYearOfPublishingBooks(bookArr, yearOfPublishing);
-        Books defineYearOfPublishing = new Books(counter);
+        Books defineYearOfPublishing;
 
         if (counter == INIT_NUMBER) {
             View.printNotFoundMessage();
-            searchByYearOfPublishing(bookList);
-        }
-
-        for (Book book : bookArr) {
-            if (book.getYearOfPublishing() > yearOfPublishing) {
-                addBook(book, defineYearOfPublishing.getBookArr());
+            defineYearOfPublishing = searchByYearOfPublishing(bookList);
+        } else {
+            defineYearOfPublishing =  new Books(counter);
+            for (Book book : bookArr) {
+                if (book.getYearOfPublishing() > yearOfPublishing) {
+                    addBook(book, defineYearOfPublishing.getBookArr());
+                }
             }
         }
         return defineYearOfPublishing;
@@ -125,4 +131,38 @@ public class BooksService {
         }
         return counter;
     }
+
+    public static Book [] sortByAuthor (Book [] bookArr) {
+        Book[] copyBook = bookArr.clone();
+        Arrays.sort(copyBook, new Comparator<Book>() {
+            @Override
+            public int compare(Book o1, Book o2) {
+                return o1.getAuthor().compareTo(o2.getAuthor());
+            }
+     });
+        return copyBook;
+    }
+
+    public static Book [] sortByPublishingHouse(Book [] bookArr) {
+        Book[] copyBook = bookArr.clone();
+        Arrays.sort(copyBook, new Comparator<Book>() {
+            @Override
+            public int compare(Book o1, Book o2) {
+                return o1.getPublishingHouse().compareTo(o2.getPublishingHouse());
+            }
+        });
+        return copyBook;
+    }
+
+    public static Book [] descSortByCost (Book [] bookArr) {
+        Book[] copyBook = bookArr.clone();
+        Arrays.sort(copyBook, new Comparator<Book>() {
+            @Override
+            public int compare(Book o1, Book o2) {
+                return Double.compare(o2.getCost(), o1.getCost());
+            }
+        });
+        return copyBook;
+    }
+
 }

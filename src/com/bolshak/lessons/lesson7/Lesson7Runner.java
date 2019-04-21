@@ -1,6 +1,6 @@
 package com.bolshak.lessons.lesson7;
 
-public class lesson7Runner {
+public class Lesson7Runner {
     public static void main(String[] args) {
         Device device = new Device(12.2, "aa01", "Xiaomi");
         Device device1 = new Device(12.2, "aa01", "Xiaomi");
